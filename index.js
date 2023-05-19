@@ -34,8 +34,8 @@ app.get('/', function(req, res) {
 
 // app.all('*', (req, res) => res.status(404).json(new ErrorResponseObject('route not defined')));
 
-app.use('/auth', require('./src/routes/auth.routes'));
-app.use('/agency', require('./src/routes/agency.routes'));
-app.use('/client', require('./src/routes/client.routes'));
+app.use('/auth', require('./routes/auth.routes'));
+app.use('/agency', require('./routes/agency.routes'));
+app.use('/client', require('./routes/client.routes'));
 
 
