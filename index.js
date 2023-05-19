@@ -8,6 +8,8 @@ const cors = require('cors');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
@@ -28,6 +30,9 @@ app.listen(process.env.PORT || 4000, function() {
 app.get('/', function(req, res) {
     res.send('Welcome to Zerozilla API');
 })
+
+
+app.all('*', (req, res) => res.status(404).json(new ErrorResponseObject('route not defined')));
 
 app.use('/auth', require('./src/routes/auth.routes'));
 app.use('/agency', require('./src/routes/agency.routes'));
